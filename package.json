@@ -2,6 +2,7 @@
   "requires": true,
   "lockfileVersion": 1,
   "dependencies": {
+    "@zeit/dns-cached-resolve": "^2.1.0",
     "dns-sync": "^0.1.3",
     "email-exists": "^0.2.1",
     "express": "^4.16.4"
@@ -9,7 +10,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "name": "Ultra Email Validation",
+  "name": "Ultra_Email_Validation",
   "description": "Clean up your email list!",
   "version": "4.16.4",
   "main": "app.js",
