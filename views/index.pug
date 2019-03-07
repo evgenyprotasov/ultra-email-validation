@@ -1,0 +1,10 @@
+html
+  head
+    title= title
+  body
+    h1= message
+        // register form
+    form(method='POST' action='/validation')
+      div.form-group
+        textarea#name.form-control(type='text', placeholder='Каждый email на новой строчке' name='email' style={width: '30%', height: '200px'})
+      button.btn.btn-primary(type='submit') Проверить
