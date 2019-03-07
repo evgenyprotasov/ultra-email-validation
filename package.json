@@ -1,0 +1,32 @@
+{
+  "requires": true,
+  "lockfileVersion": 1,
+  "dependencies": {
+    "dns-sync": "^0.1.3",
+    "email-exists": "^0.2.1",
+    "express": "^4.16.4"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "Ultra Email Validation",
+  "description": "Clean up your email list!",
+  "version": "4.16.4",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/evglayton/ultra-email-validation.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/evglayton/ultra-email-validation/issues"
+  },
+  "homepage": "https://github.com/evglayton/ultra-email-validation#readme",
+  "devDependencies": {
+    "dns": "^0.2.2",
+    "email-existence": "^0.1.6",
+    "email-validator": "^2.0.4",
+    "pug": "^2.0.3"
+  }
+}
