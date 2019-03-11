@@ -6,8 +6,7 @@ const validator = require("email-validator");
 const emailExistence = require('email-existence');
 const emailExists = require('email-exists');
 const dns = require('dns');
-
-const dnsResolve = require('@zeit/dns-cached-resolve').default;
+// const dnsResolve = require('@zeit/dns-cached-resolve').default;
 
 const asyncEmailCheck = email => {
   return new Promise((resolve, reject) => {
@@ -25,7 +24,7 @@ router.use(bodyParser.urlencoded({ extended: false, limit: '10mb' }))
 
 // Get email list from form
 router.post('/', async function(request, response) {
-  try {
+
     response.setHeader('Content-Type', 'text/html');
 
     // Form data
@@ -37,15 +36,17 @@ router.post('/', async function(request, response) {
       // Email maask validation
       if (validator.validate(emailList[i])) {
 
-        var domain = emailList[i];
-        domain = domain.split("@")[1]
+        let isEmailChecked;
+        try {
+          // Check email existence
+          isEmailChecked = await asyncEmailCheck(emailList[i]);
+        } catch (err) {
+          // If catch an exception just go out from current iteration
+          console.log(`email ${emailList[i]} error: `, err);
+          continue;
+        }
 
-        // Check domain available (dns record is exist)
-        const isDnsChecked = await dnsResolve(domain);
-        // Check email existence
-        const isEmailChecked = await asyncEmailCheck(emailList[i]);
-        
-        if (isDnsChecked && isEmailChecked) {
+        if (isEmailChecked) {
           // DEV
           console.log(`Email ${emailList[i]} is ok, ${emailList.length - i} left.`);
           // Adding email to array (for dev purpose)
@@ -58,9 +59,6 @@ router.post('/', async function(request, response) {
 
     console.log(approvedEmailList.length);
     response.end();
-  } catch (err) {
-    console.log('error: ', err);
-  }
 });
 
   module.exports = router;
